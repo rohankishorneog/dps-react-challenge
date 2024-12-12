@@ -19,7 +19,8 @@ const Filter = ({ name, label, handleChange }: FilterProps) => {
 			<input
 				id={name}
 				onChange={(e) => handleChange(e.target.value)}
-				className={`${name === 'oldest' ? 'w-3 h-4' : ''}`}
+				className={`${name === 'oldest' ? 'w-5 h-5' : ''}`}
+				type={name === 'oldest' ? 'checkbox' : 'text'}
 			/>
 		</div>
 	);
