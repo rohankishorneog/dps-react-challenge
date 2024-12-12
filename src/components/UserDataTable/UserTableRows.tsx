@@ -6,7 +6,7 @@ const UserTableRows = ({ users }: UserTableRowsProps) => {
 	return (
 		<tbody>
 			{users.map((user) => (
-				<tr>
+				<tr key={user.id}>
 					<td>
 						{user.firstName} {user.lastName}
 					</td>
