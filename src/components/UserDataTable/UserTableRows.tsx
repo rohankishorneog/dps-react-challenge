@@ -1,3 +1,5 @@
+import { convertDateFormat } from "../../lib/utils";
+
 interface UserTableRowsProps {
 	users: User[];
 	isOldest: (user: User) => boolean;
@@ -50,7 +52,7 @@ const UserTableRows = ({
               group-hover:bg-black
             `}
 					>
-						{user.birthDate}
+						{convertDateFormat(user.birthDate)}
 					</td>
 				</tr>
 			))}
