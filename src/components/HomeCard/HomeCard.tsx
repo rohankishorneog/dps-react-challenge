@@ -40,6 +40,25 @@ const HomeCard = () => {
 		fetchUsers();
 	}, []);
 
+	const ageCityMap = useMemo(() => {
+		const result: Record<string, number> = {};
+
+		userData.forEach((user) => {
+			if (result[user.address.city]) {
+				result[user.address.city] = Math.max(
+					result[user.address.city],
+					user.age
+				);
+			} else {
+				result[user.address.city] = user.age;
+			}
+		});
+
+		return result;
+	}, [userData]);
+
+	const isOldest = (user: User) => user.age >= ageCityMap[user.address.city];
+
 	const filteredData = useMemo(() => {
 		if (!searchCriteria.name && !searchCriteria.city) {
 			return userData;
@@ -94,7 +113,7 @@ const HomeCard = () => {
 			{filteredData.length === 0 ? (
 				<EmptyScreen />
 			) : (
-				<UserDataTable users={filteredData} />
+				<UserDataTable users={filteredData} isOldest={isOldest} />
 			)}
 		</div>
 	);
