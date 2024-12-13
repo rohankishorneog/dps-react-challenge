@@ -5,7 +5,9 @@ const UserDataTableHeader = () => {
 		<thead className="w-full">
 			<tr className="w-full ">
 				{tableHeaders.map((header, index) => (
-					<th key={index}>{header}</th>
+					<th key={index} className="pl-4 text-left">
+						{header}
+					</th>
 				))}
 			</tr>
 		</thead>

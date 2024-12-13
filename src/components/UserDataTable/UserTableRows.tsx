@@ -14,17 +14,44 @@ const UserTableRows = ({
 			{users.map((user) => (
 				<tr
 					key={user.id}
-					className={`${
-						isOldest(user) && highlightOldest
-							? 'bg-blue-400'
-							: 'bg-black'
-					}`}
-				>
-					<td>
+					className={`
+            ${isOldest(user) && highlightOldest
+					? 'bg-lime-800 text-white'
+					: 'bg-transparent'} hover:bg-black text-xs md:text-sm  overflow-hidden group`}>
+					<td
+						className={`
+              px-4 
+              py-3 
+              text-left 
+              first:rounded-l-lg 
+              last:rounded-r-lg 
+              group-hover:bg-black
+            `}
+					>
 						{user.firstName} {user.lastName}
 					</td>
-					<td>{user.address.city}</td>
-					<td>{user.birthDate}</td>
+					<td
+						className={`
+              px-4 
+              py-3 
+              text-left 
+              group-hover:bg-black
+            `}
+					>
+						{user.address.city}
+					</td>
+					<td
+						className={`
+              px-4 
+              py-3 
+              text-left 
+              first:rounded-l-lg 
+              last:rounded-r-lg 
+              group-hover:bg-black
+            `}
+					>
+						{user.birthDate}
+					</td>
 				</tr>
 			))}
 		</tbody>

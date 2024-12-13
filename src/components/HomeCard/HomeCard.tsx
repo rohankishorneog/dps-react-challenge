@@ -106,7 +106,7 @@ const HomeCard = () => {
 	}
 
 	return (
-		<div className="w-full">
+		<div className="w-full flex flex-col gap-2 p-4 border rounded-lg">
 			<UserFilters
 				handleSearchNameValue={(name) =>
 					handleSearchChange('name', name)

@@ -12,7 +12,7 @@ const UserFilters = ({
 	handleOldestHighlight,
 }: UserFiltersProps) => {
 	return (
-		<div className="flex w-full justify-between items-center gap-4 border rounded-md p-2">
+		<div className="flex w-full justify-between items-center gap-4">
 			<Filter
 				name="name"
 				label="Name "
