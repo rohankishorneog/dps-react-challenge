@@ -3,6 +3,7 @@ import UserFilters from '../filters/UserFilters';
 import UserDataTable from '../UserDataTable/UserDataTable';
 import { getUserData } from '../../api/userApi';
 import EmptyScreen from '../emptyScreen/EmptyScreen';
+import { useDebounce } from '../../hooks/useDebounce';
 
 const HomeCard = () => {
 	const [userData, setUserData] = useState<User[]>([]);
@@ -16,6 +17,9 @@ const HomeCard = () => {
 	const [error, setError] = useState<string | null>(null);
 
 	const [highlightOldest, setHighlightOldest] = useState<boolean>(false);
+
+	const debouncedName = useDebounce(searchCriteria.name, 1000);
+	const debouncedCity = useDebounce(searchCriteria.city, 1000);
 
 	useEffect(() => {
 		const fetchUsers = async () => {
@@ -62,25 +66,25 @@ const HomeCard = () => {
 	const isOldest = (user: User) => user.age >= ageCityMap[user.address.city];
 
 	const filteredData = useMemo(() => {
-		if (!searchCriteria.name && !searchCriteria.city) {
+		if (!debouncedName && !debouncedCity) {
 			return userData;
 		}
 
 		return userData.filter((user) => {
 			const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
 			const nameMatch =
-				!searchCriteria.name ||
-				fullName.includes(searchCriteria.name.toLowerCase());
+				!debouncedName ||
+				fullName.includes(debouncedName.toLowerCase());
 
 			const cityMatch =
-				!searchCriteria.city ||
+				!debouncedCity ||
 				user.address.city
 					.toLowerCase()
-					.includes(searchCriteria.city.toLowerCase());
+					.includes(debouncedCity.toLowerCase());
 
 			return nameMatch && cityMatch;
 		});
-	}, [userData, searchCriteria]);
+	}, [userData, debouncedName, debouncedCity]);
 
 	const handleOldestHighlight = (value: boolean) => {
 		setHighlightOldest(value);
