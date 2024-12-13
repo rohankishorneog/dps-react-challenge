@@ -1,17 +1,25 @@
 interface UserTableRowsProps {
 	users: User[];
 	isOldest: (user: User) => boolean;
+	highlightOldest: boolean;
 }
 
-const UserTableRows = ({ users, isOldest }: UserTableRowsProps) => {
+const UserTableRows = ({
+	users,
+	isOldest,
+	highlightOldest,
+}: UserTableRowsProps) => {
 	return (
 		<tbody>
 			{users.map((user) => (
 				<tr
 					key={user.id}
-					className={`${isOldest(user) ? 'bg-blue-400' : 'bg-black'}`}
+					className={`${
+						isOldest(user) && highlightOldest
+							? 'bg-blue-400'
+							: 'bg-black'
+					}`}
 				>
-					{console.log(isOldest(user))}
 					<td>
 						{user.firstName} {user.lastName}
 					</td>

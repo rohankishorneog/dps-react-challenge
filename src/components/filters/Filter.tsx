@@ -1,7 +1,7 @@
 interface FilterProps {
 	name: string;
 	label: string;
-	handleChange: (value: string) => void;
+	handleChange: (value: string | boolean) => void;
 }
 
 const Filter = ({ name, label, handleChange }: FilterProps) => {
@@ -18,7 +18,11 @@ const Filter = ({ name, label, handleChange }: FilterProps) => {
 			</label>
 			<input
 				id={name}
-				onChange={(e) => handleChange(e.target.value)}
+				onChange={(e) =>
+					handleChange(
+						name === 'oldest' ? e.target.checked : e.target.value
+					)
+				}
 				className={`${name === 'oldest' ? 'w-5 h-5' : ''}`}
 				type={name === 'oldest' ? 'checkbox' : 'text'}
 			/>

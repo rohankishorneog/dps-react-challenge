@@ -3,28 +3,32 @@ import Filter from './Filter';
 interface UserFiltersProps {
 	handleSearchCityValue: (city: string) => void;
 	handleSearchNameValue: (name: string) => void;
+	handleOldestHighlight: (value: boolean) => void;
 }
 
 const UserFilters = ({
 	handleSearchCityValue,
 	handleSearchNameValue,
+	handleOldestHighlight,
 }: UserFiltersProps) => {
 	return (
 		<div className="flex w-full justify-between items-center gap-4 border rounded-md p-2">
 			<Filter
 				name="name"
 				label="Name "
-				handleChange={handleSearchNameValue}
+				handleChange={(value) => handleSearchNameValue(value as string)}
 			/>
 			<Filter
 				name="city"
 				label="City"
-				handleChange={handleSearchCityValue}
+				handleChange={(value) => handleSearchCityValue(value as string)}
 			/>
 			<Filter
 				name="oldest"
 				label="Highlight oldest in the city"
-				handleChange={() => {}}
+				handleChange={(value) => {
+					handleOldestHighlight(value as boolean);
+				}}
 			/>
 		</div>
 	);

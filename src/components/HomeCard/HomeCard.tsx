@@ -15,6 +15,8 @@ const HomeCard = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
+	const [highlightOldest, setHighlightOldest] = useState<boolean>(false);
+
 	useEffect(() => {
 		const fetchUsers = async () => {
 			try {
@@ -80,6 +82,10 @@ const HomeCard = () => {
 		});
 	}, [userData, searchCriteria]);
 
+	const handleOldestHighlight = (value: boolean) => {
+		setHighlightOldest(value);
+	};
+
 	const handleSearchChange = (type: 'name' | 'city', value: string) => {
 		setSearchCriteria((prev) => ({
 			...prev,
@@ -108,12 +114,17 @@ const HomeCard = () => {
 				handleSearchCityValue={(city) =>
 					handleSearchChange('city', city)
 				}
+				handleOldestHighlight={handleOldestHighlight}
 			/>
 
 			{filteredData.length === 0 ? (
 				<EmptyScreen />
 			) : (
-				<UserDataTable users={filteredData} isOldest={isOldest} />
+				<UserDataTable
+					users={filteredData}
+					isOldest={isOldest}
+					highlightOldest={highlightOldest}
+				/>
 			)}
 		</div>
 	);
